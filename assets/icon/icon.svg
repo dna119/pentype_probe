@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_레이어_2" data-name="레이어 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 72.47289 80.427">
+  <defs>
+    <clipPath id="clippath">
+      <path id="SVGID" d="M55.11669,25.39524l4.93968,2.85195v3.89145l-33.84421,19.26091,9.15025,5.28078,24.69396-13.90552v9.82669l-23.93413,13.71509-23.86384-13.77657v-9.19716l5.46526,3.15505,37.39302-21.10267ZM0,20.57268v38.93323l36.23644,20.92109,36.23645-20.92109V21.27102l-15.80285-9.12389-38.39589,21.62237-6.01574-3.47263v-3.76116l22.69554-12.78104,3.74647,2.16237,12.21448-7.11959L35.63179,0,0,20.57268Z" fill="none"/>
+    </clipPath>
+    <linearGradient id="linear-gradient" x1="-243.47699" y1="731.57976" x2="-242.01295" y2="731.57976" gradientTransform="translate(13015.71185 39157.79461) scale(53.47002 -53.47002)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1a70a9"/>
+      <stop offset=".2934" stop-color="#1a70a9"/>
+      <stop offset=".88694" stop-color="#009a8b"/>
+      <stop offset="1" stop-color="#009a8b"/>
+    </linearGradient>
+  </defs>
+  <g id="Layer_1" data-name="Layer 1">
+    <g clip-path="url(#clippath)">
+      <rect x="-17.82181" y="-13.84478" width="108.11652" height="108.11652" transform="translate(-17.82181 37.40127) rotate(-44.99997)" fill="url(#linear-gradient)"/>
+    </g>
+  </g>
+</svg>

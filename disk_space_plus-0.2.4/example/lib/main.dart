@@ -1,0 +1,87 @@
+import 'dart:async';
+import 'dart:io';
+
+import 'package:disk_space_plus/disk_space_plus.dart';
+import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  double _diskSpace = 0;
+  Map<Directory, double> _directorySpace = {};
+
+  @override
+  void initState() {
+    super.initState();
+    initDiskSpacePlus();
+  }
+
+  Future<void> initDiskSpacePlus() async {
+    double diskSpace = 0;
+
+    diskSpace = await DiskSpacePlus.getFreeDiskSpace ?? 0;
+
+    List<Directory> directories;
+    Map<Directory, double> directorySpace = {};
+
+    if (Platform.isIOS) {
+      directories = [await getApplicationDocumentsDirectory()];
+    } else if (Platform.isAndroid) {
+      directories =
+          await getExternalStorageDirectories(type: StorageDirectory.movies)
+              .then(
+        (list) async => list ?? [await getApplicationDocumentsDirectory()],
+      );
+    } else {
+      return;
+    }
+
+    for (var directory in directories) {
+      var space =
+          await DiskSpacePlus.getFreeDiskSpaceForPath(directory.path) ?? 0;
+      directorySpace.addEntries([MapEntry(directory, space)]);
+    }
+
+    if (!mounted) return;
+
+    setState(() {
+      _diskSpace = diskSpace;
+      _directorySpace = directorySpace;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Plugin example app'),
+        ),
+        body: Column(
+          children: [
+            Center(
+              child: Text('Space on device (MB): $_diskSpace\n'),
+            ),
+            Center(
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  var key = _directorySpace.keys.elementAt(index);
+                  var value = _directorySpace[key];
+                  return Text('Space in ${key.path} (MB): $value\n');
+                },
+                itemCount: _directorySpace.keys.length,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

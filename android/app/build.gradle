@@ -1,0 +1,65 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+android {
+    namespace "com.kmain.pentype_probe_viewer"
+    compileSdk 35
+    ndkVersion flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    defaultConfig {
+        applicationId "com.kmain.pentype_probe_viewer"
+        minSdk 27
+        targetSdk 34
+        versionCode flutter.versionCode
+        versionName flutter.versionName
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+        }
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("release-key.keystore")
+            storePassword "gcubme@@00"
+            keyAlias "pentype_probe"
+            keyPassword "gcubme@@00"
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            shrinkResources false
+        }
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+
+flutter {
+    source "../.."
+}
+
+dependencies {
+    implementation 'junit:junit:4.12'
+    implementation 'com.scottyab:rootbeer-lib:0.1.0'
+    implementation 'com.github.HBiSoft:HBRecorder:3.0.9'
+}
